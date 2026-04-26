@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "Zettelkasten methodology skill for local markdown note systems. Capture raw ideas as typed notes and connect existing vaults with link suggestions and Maps of Content.",
   "longDescription": "Two modes in one skill:\n\n**Capture** — Give Claude a raw idea, URL, or text snippet and it produces a properly typed note with frontmatter, a concept-oriented title, and wikilink suggestions.\n\n**Connect** — Point Claude at a vault or directory and it finds orphaned notes, surfaces missing links between related notes, and generates Maps of Content for topic clusters.\n\nSupports Obsidian CLI (preferred), direct Bash file writes, and markdown output fallback. Automatically discovers your vault folder layout — no configuration needed.",
-  "author": {
+  "owner": {
     "name": "byounghoonkim",
     "email": "blue021@gmail.com"
   },
@@ -30,7 +30,7 @@
     "knowledge-management",
     "writing"
   ],
-  "skills": [
+  "plugins": [
     {
       "name": "zettelkasten",
       "displayName": "Zettelkasten",
