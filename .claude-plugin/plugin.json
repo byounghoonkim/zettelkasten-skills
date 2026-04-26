@@ -1,0 +1,16 @@
+{
+  "name": "zettelkasten",
+  "version": "1.0.0",
+  "description": "Zettelkasten methodology skill for local markdown note systems. Capture raw ideas as typed notes and connect existing vaults with link suggestions and Maps of Content.",
+  "author": {
+    "name": "byounghoonkim"
+  },
+  "repository": "https://github.com/byounghoonkim/zettelkasten-skills",
+  "keywords": [
+    "zettelkasten",
+    "notes",
+    "pkm",
+    "markdown",
+    "obsidian"
+  ]
+}
