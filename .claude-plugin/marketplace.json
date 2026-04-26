@@ -1,0 +1,126 @@
+{
+  "name": "zettelkasten-skills",
+  "displayName": "Zettelkasten Skills",
+  "version": "1.0.0",
+  "description": "Zettelkasten methodology skill for local markdown note systems. Capture raw ideas as typed notes and connect existing vaults with link suggestions and Maps of Content.",
+  "longDescription": "Two modes in one skill:\n\n**Capture** — Give Claude a raw idea, URL, or text snippet and it produces a properly typed note with frontmatter, a concept-oriented title, and wikilink suggestions.\n\n**Connect** — Point Claude at a vault or directory and it finds orphaned notes, surfaces missing links between related notes, and generates Maps of Content for topic clusters.\n\nSupports Obsidian CLI (preferred), direct Bash file writes, and markdown output fallback. Automatically discovers your vault folder layout — no configuration needed.",
+  "author": {
+    "name": "byounghoonkim",
+    "email": "blue021@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/byounghoonkim/zettelkasten-skills"
+  },
+  "homepage": "https://github.com/byounghoonkim/zettelkasten-skills",
+  "license": "MIT",
+  "keywords": [
+    "zettelkasten",
+    "notes",
+    "pkm",
+    "personal-knowledge-management",
+    "markdown",
+    "obsidian",
+    "evergreen-notes",
+    "moc",
+    "second-brain"
+  ],
+  "categories": [
+    "productivity",
+    "knowledge-management",
+    "writing"
+  ],
+  "skills": [
+    {
+      "name": "zettelkasten",
+      "displayName": "Zettelkasten",
+      "entrypoint": "skills/zettelkasten/SKILL.md",
+      "description": "Capture raw ideas as typed Zettelkasten notes or analyse an existing vault to find orphan notes, suggest links, and build Maps of Content.",
+      "triggers": [
+        "노트 만들어",
+        "정리해줘",
+        "저장해줘",
+        "연결해줘",
+        "MOC 만들어줘",
+        "zettelkasten",
+        "vault 분석"
+      ],
+      "examples": [
+        {
+          "prompt": "문득 생각났는데, 습관은 환경 설계로 바꾸는 게 의지력보다 훨씬 쉬운 것 같아. 노트 만들어줘.",
+          "description": "Captures a fleeting idea as a Fleeting note with auto-detected type"
+        },
+        {
+          "prompt": "James Clear의 Atomic Habits에서 습관 루프 개념 정리해줘.",
+          "description": "Creates a Literature note from a specific source"
+        },
+        {
+          "prompt": "저장해줘 — 복잡한 시스템은 단순한 규칙에서 출현한다.",
+          "description": "Creates a Permanent (Evergreen) note from a single atomic claim"
+        },
+        {
+          "prompt": "내 vault ~/notes에 있는 노트들 분석해서 연결 상태 알려줘.",
+          "description": "Scans a vault, finds orphan notes and suggests missing links"
+        },
+        {
+          "prompt": "습관 관련 노트들로 MOC 만들어줘.",
+          "description": "Generates a Map of Content for a topic cluster"
+        }
+      ],
+      "noteTypes": [
+        {
+          "type": "fleeting",
+          "description": "Quick capture, unpolished idea. Process or delete within 48h.",
+          "targetFolders": ["inbox", "capture", "fleeting", "quick", "scratch", "임시"]
+        },
+        {
+          "type": "literature",
+          "description": "Key ideas from a specific source, in your own words.",
+          "targetFolders": ["notes", "permanent", "zettel", "slipbox", "ideas", "영구", "노트"]
+        },
+        {
+          "type": "permanent",
+          "description": "One atomic idea stated as a complete claim. Title = a complete sentence.",
+          "targetFolders": ["notes", "permanent", "zettel", "slipbox", "ideas", "영구", "노트"]
+        },
+        {
+          "type": "moc",
+          "description": "Navigation hub linking related Permanent notes.",
+          "targetFolders": ["moc", "map", "index", "overview", "topics", "맵", "인덱스"]
+        }
+      ]
+    }
+  ],
+  "compatibility": {
+    "claudeCode": ">=1.0.0"
+  },
+  "installation": {
+    "plugin": {
+      "description": "Load as a plugin (recommended — skill is available in all sessions)",
+      "steps": [
+        "git clone https://github.com/byounghoonkim/zettelkasten-skills ~/.claude/plugins/zettelkasten-skills",
+        "Add { \"pluginDirectories\": [\"~/.claude/plugins/zettelkasten-skills\"] } to ~/.claude/settings.json"
+      ],
+      "skillAlias": "zettelkasten:zettelkasten"
+    },
+    "personal": {
+      "description": "Install as a personal skill (available in all projects)",
+      "steps": [
+        "git clone https://github.com/byounghoonkim/zettelkasten-skills /tmp/zettelkasten-skills",
+        "cp -r /tmp/zettelkasten-skills/skills/zettelkasten ~/.claude/skills/",
+        "rm -rf /tmp/zettelkasten-skills"
+      ],
+      "skillAlias": "zettelkasten"
+    },
+    "project": {
+      "description": "Install as a project skill (available in this project only)",
+      "steps": [
+        "git clone https://github.com/byounghoonkim/zettelkasten-skills /tmp/zettelkasten-skills",
+        "mkdir -p .claude/skills",
+        "cp -r /tmp/zettelkasten-skills/skills/zettelkasten .claude/skills/",
+        "rm -rf /tmp/zettelkasten-skills"
+      ],
+      "skillAlias": "zettelkasten"
+    }
+  }
+}
