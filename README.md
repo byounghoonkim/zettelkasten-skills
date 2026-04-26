@@ -12,7 +12,31 @@ Two modes in one skill:
 
 ## Installation
 
-### Option 1 — Plugin (recommended)
+### Option 1 — Claude Code CLI (recommended)
+
+Marketplace를 등록하고 플러그인을 설치합니다:
+
+```bash
+claude plugin marketplace add byounghoonkim/zettelkasten-skills
+claude plugin install zettelkasten
+```
+
+설치 후 Claude Code를 재시작하면 모든 세션에서 `zettelkasten:zettelkasten` 스킬이 활성화됩니다.
+
+업데이트:
+
+```bash
+claude plugin update zettelkasten
+```
+
+제거:
+
+```bash
+claude plugin uninstall zettelkasten
+claude plugin marketplace remove zettelkasten-skills
+```
+
+### Option 2 — Plugin (manual)
 
 Clone the repo and load it as a plugin:
 
@@ -30,7 +54,7 @@ Then add to your `~/.claude/settings.json`:
 
 The skill is available as `zettelkasten:zettelkasten` in any Claude Code session.
 
-### Option 2 — Personal skill (all projects)
+### Option 4 — Personal skill (all projects)
 
 ```bash
 git clone https://github.com/byounghoonkim/zettelkasten-skills /tmp/zettelkasten-skills
@@ -40,7 +64,7 @@ rm -rf /tmp/zettelkasten-skills
 
 Available as `zettelkasten` in any Claude Code session.
 
-### Option 3 — Project skill (this project only)
+### Option 5 — Project skill (this project only)
 
 ```bash
 git clone https://github.com/byounghoonkim/zettelkasten-skills /tmp/zettelkasten-skills
@@ -53,7 +77,13 @@ Available as `zettelkasten` in Claude Code sessions within this project.
 
 ### Verify installation
 
-Open Claude Code and run:
+설치된 플러그인 목록 확인:
+
+```bash
+claude plugin list
+```
+
+Claude Code를 열고 스킬 동작 확인:
 
 ```
 /zettelkasten
