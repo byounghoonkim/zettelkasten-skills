@@ -12,13 +12,54 @@ Two modes in one skill:
 
 ## Installation
 
-Copy the skill directory into your Claude skills folder:
+### Option 1 — Plugin (recommended)
+
+Clone the repo and load it as a plugin:
 
 ```bash
-cp -r skills/zettelkasten ~/.claude/skills/
+git clone https://github.com/byounghoonkim/zettelkasten-skills ~/.claude/plugins/zettelkasten-skills
 ```
 
-The skill is immediately available as `zettelkasten` in any Claude Code session.
+Then add to your `~/.claude/settings.json`:
+
+```json
+{
+  "pluginDirectories": ["~/.claude/plugins/zettelkasten-skills"]
+}
+```
+
+The skill is available as `zettelkasten:zettelkasten` in any Claude Code session.
+
+### Option 2 — Personal skill (all projects)
+
+```bash
+git clone https://github.com/byounghoonkim/zettelkasten-skills /tmp/zettelkasten-skills
+cp -r /tmp/zettelkasten-skills/skills/zettelkasten ~/.claude/skills/
+rm -rf /tmp/zettelkasten-skills
+```
+
+Available as `zettelkasten` in any Claude Code session.
+
+### Option 3 — Project skill (this project only)
+
+```bash
+git clone https://github.com/byounghoonkim/zettelkasten-skills /tmp/zettelkasten-skills
+mkdir -p .claude/skills
+cp -r /tmp/zettelkasten-skills/skills/zettelkasten .claude/skills/
+rm -rf /tmp/zettelkasten-skills
+```
+
+Available as `zettelkasten` in Claude Code sessions within this project.
+
+### Verify installation
+
+Open Claude Code and run:
+
+```
+/zettelkasten
+```
+
+Claude should respond describing capture and connect modes.
 
 ## Usage
 
@@ -69,13 +110,22 @@ Claude scans the vault, reports orphans and link candidates before touching anyt
 
 ## Vault folder structure
 
-The skill uses a minimal three-folder layout:
+The skill automatically discovers your vault's folder layout — no configuration needed. It scans your vault and matches folder names by keyword:
+
+| Note type | Recognised folder names |
+|-----------|------------------------|
+| Fleeting | `inbox`, `capture`, `fleeting`, `quick`, `scratch`, `0-inbox`, `임시` |
+| Permanent / Literature | `notes`, `permanent`, `zettel`, `slipbox`, `ideas`, `영구`, `노트` |
+| MOC | `moc`, `map`, `index`, `overview`, `topics`, `맵`, `인덱스` |
+
+If multiple folders match, Claude asks you to pick. If none match, it writes to the vault root and tells you.
+
+Common layouts that work out of the box:
 
 ```
-vault/
-  inbox/    # Fleeting notes
-  notes/    # Permanent + Literature
-  moc/      # Maps of Content
+vault/inbox/          vault/00-inbox/       vault/fleeting/
+vault/notes/          vault/slipbox/        vault/10-permanent/
+vault/moc/            vault/maps/           vault/overview/
 ```
 
 ## File write priority
