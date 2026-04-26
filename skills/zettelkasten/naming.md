@@ -26,11 +26,22 @@ links: []         # outbound wikilinks without [[ ]] brackets
 
 ## Folder Targets
 
+Folder names vary by system. The skill discovers the correct folder by scanning the vault and matching keywords:
+
+| Note type | Keyword patterns (case-insensitive, partial match OK) |
+|-----------|------------------------------------------------------|
+| Fleeting | `inbox`, `capture`, `fleeting`, `quick`, `scratch`, `0-inbox`, `00-inbox`, `_inbox`, `임시` |
+| Permanent / Literature | `notes`, `permanent`, `zettel`, `zettels`, `slipbox`, `ideas`, `01-notes`, `10-notes`, `영구`, `노트` |
+| MOC | `moc`, `map`, `maps`, `index`, `indices`, `overview`, `topics`, `structure`, `맵`, `인덱스` |
+
+**Fallback:** if no folder matches, write to vault root and notify the user.
+
+**Common vault layouts this covers:**
+
 ```
-vault/
-  inbox/    # Fleeting notes land here
-  notes/    # Permanent + Literature
-  moc/      # Maps of Content
+vault/inbox/          vault/00-inbox/       vault/fleeting/
+vault/notes/          vault/slipbox/        vault/10-permanent/
+vault/moc/            vault/maps/           vault/overview/
 ```
 
 ## Title Guidelines

@@ -40,18 +40,43 @@ If the vault is accessible (path provided or `obsidian version` exits 0):
 - Scan existing note titles and tags for related keywords
 - Add candidates to the `links:` frontmatter field
 
-### 3. Write File
+### 3. Resolve Target Folder
+
+Before writing, determine the correct folder using this discovery sequence:
+
+```
+obsidian version exits 0?
+  → obsidian list (or equivalent) to get vault folder list → match heuristics below
+
+vault path known?
+  → find <vault> -maxdepth 1 -type d → match heuristics below
+
+neither?
+  → ask: "노트를 저장할 폴더 경로를 알려주세요 (예: inbox, notes/fleeting 등)"
+```
+
+**Folder heuristics** (see `naming.md` for full keyword list):
+
+| Note type | Match keywords in folder name |
+|-----------|-------------------------------|
+| Fleeting | inbox, capture, fleeting, quick, scratch, 임시 |
+| Permanent / Literature | notes, permanent, zettel, slipbox, ideas, 영구, 노트 |
+| MOC | moc, map, index, overview, topics, 맵, 인덱스 |
+
+Resolution rules:
+- **Exact single match** → use it without asking
+- **Multiple candidates** → show list, ask user to pick (one question only)
+- **No match** → use vault root; print: "일치하는 폴더가 없어 vault 루트에 저장합니다"
+
+Cache the resolved mapping for the rest of the session.
+
+### 4. Write File
 
 ```
 obsidian version exits 0?   → obsidian create name="<filename>" content="<body>"
-vault path known?           → Bash: write to <vault>/<folder>/<filename>.md
-neither?                    → Output markdown block; print: "저장 경로: <vault>/<folder>/<filename>.md"
+vault path known?           → Bash: write to <vault>/<resolved_folder>/<filename>.md
+neither?                    → Output markdown block; print: "저장 경로: <resolved_folder>/<filename>.md"
 ```
-
-Folder targets (from `naming.md`):
-- Fleeting → `inbox/`
-- Literature + Permanent → `notes/`
-- MOC → `moc/`
 
 ## Connect Mode
 
