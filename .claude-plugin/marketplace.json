@@ -34,7 +34,7 @@
     {
       "name": "zettelkasten",
       "displayName": "Zettelkasten",
-      "source": "skills/zettelkasten/SKILL.md",
+      "source": "skills/zettelkasten",
       "description": "Capture raw ideas as typed Zettelkasten notes or analyse an existing vault to find orphan notes, suggest links, and build Maps of Content.",
       "triggers": [
         "노트 만들어",
